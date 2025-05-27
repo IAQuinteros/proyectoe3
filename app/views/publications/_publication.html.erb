@@ -18,6 +18,9 @@
 
       <td class="text-end">
         <%= link_to 'Ver', publication_path(publication), class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Editar', edit_publication_path(publication), class: "btn btn-primary btn-sm" %>
+        <%= button_to 'Eliminar', publication_path(publication), method: :delete, data: { confirm: '¿Seguro que desea eliminar esta publicacion?' }, class: "btn btn-danger btn-sm" %>
+
       </td>
     </tr>
     </div>

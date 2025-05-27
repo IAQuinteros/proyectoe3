@@ -28,15 +28,21 @@ class UsersController < ApplicationController
   def update
       @user = User.find(params[:id])
       if @user.update(user_params)
-          redirect_to @user, notice: "Usuario actualizado correctamente."
+          redirect_to @user, notice: "Usuario actualizado correctamente"
       else
           render :edit, status: :unprocessable_entity
       end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_path, notice: "Usuario eliminado correctamente"
+  end
+
   private
 
   def user_params
-      params.require(:user).permit(:name, :username, :email, :image)
+      params.require(:user).permit(:name, :password, :mail, :username, :sex, :date_create, :user_image)
   end
 end

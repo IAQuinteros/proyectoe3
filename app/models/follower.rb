@@ -1,9 +1,9 @@
 class Follower < ApplicationRecord
   belongs_to :user, class_name: "User"
-  belongs_to :user2, class_name: 'User', foreign_key: 'user2'
+  belongs_to :followed_user, class_name: 'User'
 
   validates :date_followers, presence: true
-  validates :user2, presence: true 
+  validates :followed_user, presence: true 
 
   #validates :cannot_follower_self 
 

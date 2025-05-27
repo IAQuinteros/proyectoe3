@@ -1,5 +1,7 @@
 <div class="container mt-4">
   <h1>Seguidores</h1>
+    <%= link_to 'Agregar followers', new_follower_path%>
+
 
   <table class="table table-striped">
     <thead>
@@ -17,6 +19,8 @@
 
           <td class="text-end">
             <%= link_to "Ver", follower_path(follower), class: "btn btn-primary btn-sm" %>
+              <%= link_to "Editar", edit_follower_path(follower), class: "btn btn-primary btn-sm" %>
+            <%= button_to 'Eliminar', follower_path(follower), method: :delete, data: { confirm: '¿Seguro que desea eliminar este follow?' }, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>

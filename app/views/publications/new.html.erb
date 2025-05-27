@@ -8,35 +8,35 @@
           <h5>Errores al crear nueva Publicacion:</h5>
           <ul>
             <% @publication.errors.full_messages.each do |pbl| %>
-              <li><%= bpl %></li>
+              <li><%= pbl %></li>
             <% end %>
           </ul>
         </div>
       <% end %>
 
-      <%= form_with(model: @publicaiton, local: true) do |form| %>
+      <%= form_with(model: @publication, local: true) do |form| %>
         <div class="mb-3">
+
           <%= form.label :publication_image, "Imagen" %>
           <%= form.text_field :publication_image, placeholder: "URL de imagen", class: "form-control" %>
         </div>
 
         <div class="mb-3">
           <%= form.label :description, "Descripcion" %>
-          <%= form.password_field :description, placeholder: "Agregue descripcion", class: "form-control" %>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :user_id, "" %>
-          <%= form.text_field :, placeholder: "", class: "form-control" %>
+          <%= form.text_area :description, placeholder: "Agregue descripcion", class: "form-control" %>
         </div>
 
         <div>
-        <%= date_create: Date.today %>
+          <%= form.hidden_field :data_create, value: Date.today %>
+        </div>
+
+        <div>
+        <%= form.hidden_field :user_id %>
         </div>
 
         <div class="d-flex justify-content-between">
-          <%= form.submit "Guardar", class: "btn btn-primary btn-sm", id: "liveAlertBtn" %>
           <%= link_to 'Volver', users_path, class: "btn btn-secondary btn-sm" %>
+          <%= form.submit "Guardar", class: "btn btn-primary btn-sm", id: "liveAlertBtn" %>
         </div>
       <% end %>
 

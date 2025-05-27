@@ -1,6 +1,4 @@
  <div class="container mt-4">
-
-
 <br>
 <br>
 <br>
@@ -9,6 +7,8 @@
   <div class="card-header">Informacion</div>
   <div class="card-body">
     <p class="card-text">
+    <%= link_to 'Ver mis publicaciones', publications_by_user_path(id:@user.id), class: "btn btn-primary btn-sm"%>
+
     
     <p>
 <strong>Nombre: </strong>
@@ -16,7 +16,7 @@
 </p>
 
 <p>
-<strong>Apellido: </strong>
+<strong>Username: </strong>
 <%= @user.username %>
 </p>
 
@@ -49,10 +49,11 @@
   </ul>
 </p>
 
-<td>
+<p>
 <%= link_to 'Volver', users_path, class: "btn btn-primary btn-sm" %>
-</td>
+<%= link_to 'Editar', edit_user_path, class: "btn btn-primary btn-sm" %>
 </p>
+
   </div>
   </div>
 </div>

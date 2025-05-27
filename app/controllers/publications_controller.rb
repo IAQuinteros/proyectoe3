@@ -10,6 +10,7 @@ class PublicationsController < ApplicationController
 
     def new
      @publication = Publication.new
+    @publication.user_id = params[:user_id]
   end
 
   def create
@@ -22,7 +23,7 @@ class PublicationsController < ApplicationController
   end
 
   def edit
-      @user = Publication.find(params[:id])
+      @publication = Publication.find(params[:id])
   end
 
   def update
@@ -34,10 +35,21 @@ class PublicationsController < ApplicationController
       end
   end
 
-  private
+    def destroy
+    @publication = Publication.find(params[:id])
+    @publication.destroy
+    redirect_to publications_path, notice: "Publicacion eliminada correctamente"
+  end
 
+
+  def by_user
+    @user = User.find(params[:id])
+    @publications = @user.publications.order(created_at: :desc)
+    end
+
+    private
   def publication_params
-      params.require(:publication).permit(:publication_image, :description, :user_id,)
+      params.require(:publication).permit(:publication_image, :description, :user_id, :data_create)
   end
 
 end

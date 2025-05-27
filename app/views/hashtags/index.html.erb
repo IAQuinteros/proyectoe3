@@ -1,5 +1,7 @@
 <div class="container mt-4">
   <h1>Hashtags</h1>
+  <%= link_to 'Add new hashtag', new_hashtag_path%>
+
 
   <table class="table table-striped">
     <thead>
@@ -14,6 +16,8 @@
           <td><%= hashtag.name %></td>
           <td class="text-end">
             <%= link_to "Ver", hashtag_path(hashtag), class: "btn btn-primary btn-sm" %>
+            <%= link_to "Editar", edit_hashtag_path(hashtag), class: "btn btn-primary btn-sm" %>
+            <%= button_to 'Eliminar', hashtag_path(hashtag), method: :delete, data: { confirm: '¿Seguro que desea eliminar este hashtag?' }, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "publications/show"
   get "users/index"
   get "users/show"
+  get 'users/:id/publications/by_user', to: 'publications#by_user', as: :publications_by_user
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :users do 
     resources :publications, only: [:index, :show]
-    resources :followers, only: [:index, :show]
+    resources :followers, only: [:index, :show, :destroy]
     resources :likes, only: [:index, :show]
     resources :comments, only: [:index, :show]
   end
@@ -36,10 +37,10 @@ Rails.application.routes.draw do
     resources :hashtags, only: [:index, :show]
   end
 
-  resources :likes, only: [:index, :show]
-  resources :followers, only: [:index, :show]
-  resources :hashtags, only: [:index, :show]
-  resources :comments, only: [:index, :show]
+  resources :likes, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :followers, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :hashtags, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :comments, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   
 
 

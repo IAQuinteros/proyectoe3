@@ -11,19 +11,25 @@
       <td>
       <%= user.mail %>
       </td>
-            <td>
+      <td>
       <%= user.sex %>
       </td>
-            <td>
+      <td>
       <%= user.user_image %>
       </td>
 
 
       
-      <td class="text-end">
+      <td>
         <%= link_to 'Ver', user_path(user), class: "btn btn-primary btn-sm" %>
-      </td>
-      <td class="text-end">
         <%= link_to 'Editar', edit_user_path(user), class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Add new publication', new_publication_path(user_id:user.id), class: "btn btn-primary btn-sm"%>
+        <%= button_to 'Eliminar', user_path(user), method: :delete, data: { confirm: '¿Seguro que desea eliminar este usuario?' }, class: "btn btn-danger btn-sm" %>
+
+        <%#= form_with url: user_path(user), method: :post, local: true do %>
+        <%#= hidden_field_tag :_method, :delete %>
+        <%#= submit_tag 'Eliminar', class: "btn btn-danger btn-sm-outline-danger", data: { confirm: '¿Seguro que desea eliminar este usuario?'} %>
+        <%# end %>
+
       </td>
     </tr>

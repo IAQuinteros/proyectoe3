@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <div class="card text-bg-light mb-3 mx-auto" style="max-width: 24rem;">
+    <div class="card-header">Crear Followers</div>
+    <div class="card-body">
+      
+      <% if @follower.errors.any? %>
+        <div class="alert alert-danger">
+          <h5>Errores al crear nuevo follower:</h5>
+          <ul>
+            <% @follower.errors.full_messages.each do |flw| %>
+              <li><%= flw %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form_with(model: @follower, local: true) do |form| %>
+        <div class="mb-3">
+        <div>
+          <%= form.hidden_field :date_followers, value: Date.today %>
+        </div>
+        <div>
+          <%= form.label :user_id, "Username de usuario 1: " %>
+          <%= form.select :user_id, User.all.map { |u| [u.username, u.id]}, {} %>
+        </div>
+        <div>
+          <%= form.label :followed_user_id, "Username de usuario 2: " %>
+          <%= form.select :followe_user_id, User.all.map { |u| [u.username, u.id]}, {} %>
+        </div>
+
+        <div class="d-flex justify-content-between">
+        <%= link_to 'Volver', followers_path, class: "btn btn-secondary btn-sm" %>
+          <%= form.submit "Guardar", class: "btn btn-primary btn-sm", id: "liveAlertBtn" %>
+        </div>
+      <% end %>
