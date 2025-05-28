@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     has_many :publications, dependent: :destroy
     has_many :followers, class_name: "Follower", foreign_key: "user_id", dependent: :destroy
-    has_many :followers_users, through: :followers, source: :user2, dependent: :destroy
+    has_many :followers_users, through: :followers, source: :followed_user
     has_many :likes, dependent: :destroy
     has_many :comments, dependent: :destroy
 
