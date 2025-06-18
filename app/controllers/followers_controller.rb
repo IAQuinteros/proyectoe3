@@ -1,4 +1,6 @@
 class FollowersController < ApplicationController
+  load_and_authorize_resource  
+
   def index
     @followers = Follower.all
   end

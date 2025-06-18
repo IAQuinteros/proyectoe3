@@ -1,36 +1,39 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Entrega 4</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Entrega 4</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-         <%= link_to "Users", users_path, class: "nav-link" %>
+          <%= link_to "Users", users_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-         <%= link_to "Publications", publications_path, class: "nav-link" %>
+          <%= link_to "Publications", publications_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-         <%= link_to "Likes", likes_path, class: "nav-link" %>
+          <%= link_to "Likes", likes_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-         <%= link_to "Hashtags", hashtags_path, class: "nav-link" %>
+          <%= link_to "Hashtags", hashtags_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-         <%= link_to "Followers", followers_path, class: "nav-link" %>
+          <%= link_to "Followers", followers_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-         <%= link_to "Comments", comments_path, class: "nav-link" %>
+          <%= link_to "Comments", comments_path, class: "nav-link" %>
         </li>
-        <% if user_signed_in? %>
-          <%= button_to "Cerrar sesión", destroy_user_session_path, 
-                method: :delete, 
-                class: "btn btn-outline-danger" %>
-        <% end %>
-
       </ul>
+
+      <% if user_signed_in? %>
+      <%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "Ingresar", new_user_session_path, class: "btn btn-outline-light me-2" %>
+        <%= link_to "Registrarse", new_user_registration_path, class: "btn btn-light" %>
+      <% end %>
     </div>
   </div>
 </nav>

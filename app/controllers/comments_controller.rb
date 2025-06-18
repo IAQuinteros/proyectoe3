@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+  load_and_authorize_resource  
+  
   def index
     @comments = Comment.all
   end
@@ -7,17 +10,20 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-    def new
-    @comment = Comment.new
-    @comment.user_id = params[:user_id]
-    @comment.publication_id = params[:publication_id]
+  def new
+    @publication = Publication.find(params[:publication_id])
+    @comment = @publication.comments.new
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @publication = Publication.find(params[:publication_id])
+    @comment = @publication.comments.new(comment_params)
+    @comment.user = current_user
+    @comment.date_create = Date.today
+
     if @comment.save
-        redirect_to @comment, notice: 'Comentario creado con exito'
-    else 
+      redirect_to comments_path, notice: 'Comentario agregado correctamente.'
+    else
       render :new, status: :unprocessable_entity
     end
   end
@@ -43,7 +49,7 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:date_create, :content, :user_id, :publication_id, :actualization_date)
+    params.require(:comment).permit(:content)
 
   end
 end

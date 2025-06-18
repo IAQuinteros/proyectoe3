@@ -1,7 +1,9 @@
 <div class="container mt-4">
   <h1>Seguidores</h1>
-    <%= link_to 'Agregar followers', new_follower_path%>
 
+  <% if can?(:create, Follower) %>
+    <%= link_to 'Agregar followers', new_follower_path, class: "btn btn-success mb-3" %>
+  <% end %>
 
   <table class="table table-striped">
     <thead>
@@ -12,15 +14,15 @@
       </tr>
     </thead>
     <tbody>
-          <% @followers.each do |follower| %>
+      <% @followers.each do |follower| %>
         <tr>
           <td><%= follower.user.username if follower.user %></td>
           <td><%= follower.followed_user.username if follower.followed_user %></td>
-
           <td class="text-end">
             <%= link_to "Ver", follower_path(follower), class: "btn btn-primary btn-sm" %>
-            <%#= link_to "Editar", edit_follower_path(follower), class: "btn btn-primary btn-sm" %>
-            <%= button_to 'Eliminar', follower_path(follower), method: :delete, data: { confirm: '¿Seguro que desea eliminar este follow?' }, class: "btn btn-danger btn-sm" %>
+            <% if can?(:destroy, follower) %>
+              <%= button_to 'Eliminar', follower_path(follower), method: :delete, data: { confirm: '¿Seguro que desea eliminar este follow?' }, class: "btn btn-danger btn-sm" %>
+            <% end %>
           </td>
         </tr>
       <% end %>

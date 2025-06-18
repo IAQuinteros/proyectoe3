@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  load_and_authorize_resource  
   def index
     @likes = Like.all
   end
@@ -13,14 +14,19 @@ class LikesController < ApplicationController
     @like.publication_id = params[:publication_id]
   end
 
-  def create
-    @like = Like.new(like_params)
-    if @like.save
-        redirect_to @like, notice: 'Like creado con exito'
-    else 
-      render :new, status: :unprocessable_entity
-    end
+def create
+  @like = Like.new(
+    user: current_user,
+    publication_id: params[:publication_id],
+    date_create: Date.today
+  )
+  if @like.save
+    redirect_to likes_path, notice: '¡Like agregado!'
+  else
+    redirect_back fallback_location: publications_path, alert: @like.errors.full_messages.to_sentence
   end
+end
+
 
     def edit
       @like = Like.find(params[:id])
@@ -41,9 +47,5 @@ class LikesController < ApplicationController
     redirect_to likes_path, notice: "Like eliminado correctamente"
   end
 
-  private
-  def like_params
-    params.require(:like).permit(:date_create, :publication_id, :user_id)
 
-  end
 end

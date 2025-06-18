@@ -15,12 +15,17 @@
   <td>
     <%= link_to 'Ver', user_path(user), class: "btn btn-primary btn-sm" %>
     
-    <% if user == current_user %>
-      <%= link_to 'Editar', edit_user_registration_path, class: "btn btn-primary btn-sm" %>
-      
-      <%= button_to 'Eliminar mi cuenta', registration_path(user),
+    <% if can? :update, user %>
+      <%= link_to 'Editar', 
+            (current_user.admin? ? edit_user_path(user) : edit_user_registration_path), 
+            class: "btn btn-primary btn-sm" %>
+    <% end %>
+    
+    <% if can? :destroy, user %>
+      <%= button_to current_user.admin? ? 'Eliminar' : 'Eliminar mi cuenta', 
+            current_user.admin? ? user_path(user) : registration_path(user),
             method: :delete,
-            data: { confirm: '¿Eliminar tu cuenta permanentemente?' },
+            data: { confirm: current_user.admin? ? '¿Eliminar este usuario?' : '¿Eliminar tu cuenta permanentemente?' },
             class: "btn btn-danger btn-sm" %>
     <% end %>
   </td>

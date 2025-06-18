@@ -1,26 +1,32 @@
-    <div class="container mt-4">
-    <tr>
-      <td>
-      <%= publication.id %>
-      </td>
-      <td>
-      <%= publication.publication_image %>
-      </td>
-      <td>
-      <%= publication.user.username %>
-      </td>
-      <td> 
-      <%= publication.description %>
-      </td>
-      <td>
-      <%= publication.data_create %>
-      </td>
+<tr>
+  <td><%= publication.id %></td>
+  <td><%= publication.publication_image %></td>
+  <td><%= publication.user.username %></td>
+  <td><%= publication.description %></td>
+  <td><%= publication.data_create %></td>
 
-      <td class="text-end">
-        <%= link_to 'Ver', publication_path(publication), class: "btn btn-primary btn-sm" %>
-        <%= link_to 'Editar', edit_publication_path(publication), class: "btn btn-primary btn-sm" %>
-        <%= button_to 'Eliminar', publication_path(publication), method: :delete, data: { confirm: '¿Seguro que desea eliminar esta publicacion?' }, class: "btn btn-danger btn-sm" %>
+  <td class="text-end">
+    <%= link_to 'Ver', publication_path(publication), class: "btn btn-primary btn-sm" %>
 
-      </td>
-    </tr>
-    </div>
+    <% if can?(:edit, publication) %>
+      <%= link_to 'Editar', edit_publication_path(publication), class: "btn btn-warning btn-sm" %>
+    <% end %>
+
+    <% if can?(:destroy, publication) %>
+      <%= button_to 'Eliminar', publication_path(publication), method: :delete, data: { confirm: '¿Seguro que desea eliminar esta publicación?' }, class: "btn btn-danger btn-sm" %>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <% unless publication.likes.exists?(user_id: current_user.id) %>
+      <%= button_to 'Like ❤️', publication_likes_path(publication), method: :post, class: "btn btn-success btn-sm" %>
+    <% else %>
+        <span class="badge bg-secondary">Ya diste like</span>
+    <% end %>
+    <% if user_signed_in? %>
+        <%= link_to 'Comentar', new_publication_comment_path(publication), class: "btn btn-success btn-sm" %>
+
+    <% end %>
+    <% end %>
+  </td>
+</tr>
+

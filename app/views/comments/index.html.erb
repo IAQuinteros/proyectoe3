@@ -1,7 +1,6 @@
 <div class="container mt-4">
   <h1>Comentarios</h1>
-<%= link_to 'Add new comment', new_comment_path%>
-<br>
+  <br>
 
   <table class="table table-striped">
     <thead>
@@ -15,16 +14,19 @@
     <tbody>
       <% @comments.each do |comment| %>
         <tr>
-        <td><%= comment.user.username if comment.user %></td>
-        <td>
-        <%= "#{comment.publication.id} - Publicación de #{comment.publication.user.username}" if comment.publication %>
-        </td>
-        <td><%= comment.content %></td>
+          <td><%= comment.user.username if comment.user %></td>
+          <td><%= "#{comment.publication.id} - Publicación de #{comment.publication.user.username}" if comment.publication %></td>
+          <td><%= comment.content %></td>
           <td class="text-end">
             <%= link_to "Ver", comment_path(comment), class: "btn btn-primary btn-sm" %>
-            <%= link_to "Editar", edit_comment_path(comment), class: "btn btn-primary btn-sm" %>
-            <%= button_to 'Eliminar', comment_path(comment), method: :delete, data: { confirm: '¿Seguro que desea eliminar este comentario?' }, class: "btn btn-danger btn-sm" %>
+            
+            <% if can? :update, comment %>
+              <%= link_to "Editar", edit_comment_path(comment), class: "btn btn-primary btn-sm" %>
+            <% end %>
 
+            <% if can? :destroy, comment %>
+              <%= button_to 'Eliminar', comment_path(comment), method: :delete, data: { confirm: '¿Seguro que desea eliminar este comentario?' }, class: "btn btn-danger btn-sm" %>
+            <% end %>
           </td>
         </tr>
       <% end %>
