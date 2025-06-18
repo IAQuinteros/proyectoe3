@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -47,4 +48,10 @@ class UsersController < ApplicationController
   def user_params
       params.require(:user).permit(:name, :password, :email, :username, :sex, :date_create, :user_image)
   end
+
+  def check_admin
+  unless current_user.admin?
+    redirect_to root_path, alert: "No tienes permisos para esta acción"
+  end
+end
 end

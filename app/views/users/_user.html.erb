@@ -1,31 +1,27 @@
-    <tr>
-    <td>
-    <%= index + 1 %>
-    </td>
-      <td>
-      <%= user.name %>
-      </td>
-      <td>
-      <%= user.username %>
-      </td>
-      <td>
-      <%= user.email %>
-      </td>
-      <td>
-      <%= user.sex %>
-      </td>
-      <td>
-      <%= user.user_image %>
-      </td>
-
-
+<tr>
+  <td><%= index + 1 %></td>
+  <td><%= user.name %></td>
+  <td><%= user.username %></td>
+  <td><%= user.email %></td>
+  <td><%= user.sex %></td>
+  <td>
+    <% if user.user_image.present? %>
+      <%= image_tag user.user_image, width: 50, height: 50, class: "rounded-circle" %>
+    <% else %>
+      Sin imagen
+    <% end %>
+  </td>
+  
+  <td>
+    <%= link_to 'Ver', user_path(user), class: "btn btn-primary btn-sm" %>
+    
+    <% if user == current_user %>
+      <%= link_to 'Editar', edit_user_registration_path, class: "btn btn-primary btn-sm" %>
       
-      <td>
-        <%= link_to 'Ver', user_path(user), class: "btn btn-primary btn-sm" %>
-        <%= link_to 'Editar', edit_user_path(user), class: "btn btn-primary btn-sm" %>
-        <%= link_to 'Add new publication', new_publication_path(user_id:user.id), class: "btn btn-primary btn-sm"%>
-        <%= button_to 'Eliminar', user_path(user), method: :delete, data: { confirm: '¿Seguro que desea eliminar este usuario?' }, class: "btn btn-danger btn-sm" %>
-
-
-      </td>
-    </tr>
+      <%= button_to 'Eliminar mi cuenta', registration_path(user),
+            method: :delete,
+            data: { confirm: '¿Eliminar tu cuenta permanentemente?' },
+            class: "btn btn-danger btn-sm" %>
+    <% end %>
+  </td>
+</tr>
