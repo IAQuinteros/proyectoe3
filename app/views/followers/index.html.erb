@@ -15,11 +15,11 @@
           <% @followers.each do |follower| %>
         <tr>
           <td><%= follower.user.username if follower.user %></td>
-          <td><%= follower.user2.username if follower.user2 %></td>
+          <td><%= follower.followed_user.username if follower.followed_user %></td>
 
           <td class="text-end">
             <%= link_to "Ver", follower_path(follower), class: "btn btn-primary btn-sm" %>
-              <%= link_to "Editar", edit_follower_path(follower), class: "btn btn-primary btn-sm" %>
+            <%#= link_to "Editar", edit_follower_path(follower), class: "btn btn-primary btn-sm" %>
             <%= button_to 'Eliminar', follower_path(follower), method: :delete, data: { confirm: '¿Seguro que desea eliminar este follow?' }, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>

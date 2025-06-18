@@ -18,12 +18,12 @@
         <div class="mb-3">
         <div>
           <%= form.label :user_id, "Username de usuario: " %>
-          <%= form.select :user_id, User.all.map { |u| [u.username, u.id]}%>
+          <%= form.select :user_id, User.all.map { |u| [u.username, u.id]}, {}, class: "form-select"%>
         </div>
 
         <div>
           <%= form.label :publication_id, "Id de publicacion: " %>
-          <%= form.select :publication_id, Publication.all.map { |p| ["#{p.user.username}-(id: #{p.id})", p.id]}%>
+          <%= form.select :publication_id, Publication.all.map { |p| ["#{p.user.username}-(id: #{p.id})", p.id]}, {}, class: "form-select"%>
         </div>
 
         <div>
@@ -31,8 +31,12 @@
           <%= form.text_area :content, class: "form-control" %>
         </div>
 
+          <div>
+          <%= form.hidden_field :actualization_date, value: Date.today %>
+        </div>
+
         <div class="d-flex justify-content-between">
-        <%= link_to 'Actualizar', class: "btn btn-secondary btn-sm" %>
-        <%= link_to 'Volver', comment_path, class: "btn btn-secondary btn-sm" %>
+        <%= link_to 'Volver', comments_path, class: "btn btn-secondary btn-sm" %>
+          <%= form.submit "Actualizar", class: "btn btn-primary btn-sm" %> 
         </div>
       <% end %>

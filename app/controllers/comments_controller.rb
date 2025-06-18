@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:date_create, :content, :user_id, :publication_id)
+    params.require(:comment).permit(:date_create, :content, :user_id, :publication_id, :actualization_date)
 
   end
 end

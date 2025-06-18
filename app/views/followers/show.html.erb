@@ -9,7 +9,7 @@
     <p class="card-text">
 
   <p><strong>Usuario:</strong> <%= @follower.user.username if @follower.user %></p>
-  <p><strong>Sigue a:</strong> <%= @follower.user2.username if @follower.user2 %></p>
+  <p><strong>Sigue a:</strong> <%= @follower.followed_user.username if @follower.followed_user %></p>
   <p><strong>Fecha de seguimiento</strong> <%= @follower.date_followers %></p>
 
 

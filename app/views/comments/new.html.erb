@@ -21,12 +21,12 @@
         </div>
         <div>
           <%= form.label :user_id, "Username de usuario: " %>
-          <%= form.select :user_id, User.all.map { |u| [u.username, u.id]}%>
+          <%= form.select :user_id, User.all.map { |u| [u.username, u.id]}, {}, class: "form-select" %>
         </div>
 
         <div>
           <%= form.label :publication_id, "Id de publicacion: " %>
-          <%= form.select :publication_id, Publication.all.map { |p| ["#{p.user.username}-(id: #{p.id})", p.id]}%>
+          <%= form.select :publication_id, Publication.all.map { |p| ["#{p.user.username}-(id: #{p.id})", p.id]}, {}, class: "form-select" %>
         </div>
 
         <div>

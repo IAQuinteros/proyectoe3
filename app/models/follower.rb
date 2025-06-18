@@ -5,10 +5,14 @@ class Follower < ApplicationRecord
   validates :date_followers, presence: true
   validates :followed_user, presence: true 
 
-  #validates :cannot_follower_self 
+  validate :cannot_follow_self 
+  validates :followed_user_id, uniqueness: { scope: :user_id, message: "Ya estás siguiendo a esta persona" }
 
-  #def cannot_follower_self
-   # errors.add(:users2, 'No te puedes seguir a ti mismo') if users_id == users2
-  #end
 
+  private
+    def cannot_follow_self
+    if user_id == followed_user_id
+      errors.add(:followed_user, 'No te puedes seguir a ti mismo')
+    end
+  end
 end

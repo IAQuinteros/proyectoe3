@@ -18,15 +18,15 @@
     <div class="mb-3">
         <div>
           <%= form.label :user_id, "Username de usuario: " %>
-          <%= form.select :user_id, User.all.map { |u| [u.username]}%>
+          <%= form.select :user_id, User.all.map { |u| [u.username, u.id] }, {}, class: "form-select" %>
         </div>
         <div>
           <%= form.label :publication_id, "Id de publicacion: " %>
-          <%= form.select :publication_id, Publication.all.map { |p| [p.id]}%>
+          <%= form.select :publication_id, Publication.all.map { |p| ["#{p.id} - #{p.user.username}", p.id] }, {}, class: "form-select" %>
         </div>
     <div class="d-flex justify-content-between">
+    <%= link_to 'Volver', likes_path, class: "btn btn-secondary btn-sm" %>
     <%= form.submit "Actualizar", class: "btn btn-primary btn-sm" %> 
-    <%= link_to 'Volver', like_path, class: "btn btn-secondary btn-sm" %>
     </div>
     <% end %>
 

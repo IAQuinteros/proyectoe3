@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  devise_for :users
+
   get "hashtags/index"
   get "hashtags/show"
   get "comments/index"
@@ -24,6 +27,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+
+
+  root "users#index"
+
+  
 
   resources :users do 
     resources :publications, only: [:index, :show]

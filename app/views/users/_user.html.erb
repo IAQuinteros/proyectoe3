@@ -9,7 +9,7 @@
       <%= user.username %>
       </td>
       <td>
-      <%= user.mail %>
+      <%= user.email %>
       </td>
       <td>
       <%= user.sex %>
@@ -26,10 +26,6 @@
         <%= link_to 'Add new publication', new_publication_path(user_id:user.id), class: "btn btn-primary btn-sm"%>
         <%= button_to 'Eliminar', user_path(user), method: :delete, data: { confirm: '¿Seguro que desea eliminar este usuario?' }, class: "btn btn-danger btn-sm" %>
 
-        <%#= form_with url: user_path(user), method: :post, local: true do %>
-        <%#= hidden_field_tag :_method, :delete %>
-        <%#= submit_tag 'Eliminar', class: "btn btn-danger btn-sm-outline-danger", data: { confirm: '¿Seguro que desea eliminar este usuario?'} %>
-        <%# end %>
 
       </td>
     </tr>

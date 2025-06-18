@@ -18,19 +18,34 @@ User.delete_all
 Comment.delete_all
 
 users = [
-    User.create!(name: "Alicia", password: "alicia123", mail: "alicia@gmail.com", username: "alicia1415", sex: 'F', date_create: Date.today, user_image: "alicia.png"),
-    User.create!(name: "Jorge", password: "jorge123", mail: "jorge@gmail.com", username: "jorge2022", sex: 'M', date_create: Date.today, user_image: "jorge.png"),
-    User.create!(name: "Andres", password: "andres123", mail: "andres@gmail.com", username: "andres0403",sex: 'M', date_create: Date.today, user_image: "andres.png")
+  User.create!(
+    name: "Alicia", password: "alicia123", email: "alicia@gmail.com",
+    username: "alicia1415", sex: 'F', date_create: Date.today, user_image: "alicia.png"
+  ),
+  User.create!(
+    name: "Jorge", password: "jorge123", email: "jorge@gmail.com",
+    username: "jorge2022", sex: 'M', date_create: Date.today, user_image: "jorge.png"
+  ),
+  User.create!(
+    name: "Andres", password: "andres123", email: "andres@gmail.com",
+    username: "andres0403", sex: 'M', date_create: Date.today, user_image: "andres.png"
+  )
 ]
 
 publications = [
-Publication.create!(data_create: Date.today, publication_image: "publication_image1.png", description: "description1", user: users[0]),
-Publication.create!(data_create: Date.today, publication_image: "publication_image2.png", description: "description2", user: users[1])
+  Publication.create!(
+    data_create: Date.today, publication_image: "publication_image1.png",
+    description: "description1", user: users[0]
+  ),
+  Publication.create!(
+    data_create: Date.today, publication_image: "publication_image2.png",
+    description: "description2", user: users[1]
+  )
 ]
 
-Follower.create!(user: users[0], user2: users[1].id, date_followers: Date.today)
-Follower.create!(user: users[1], user2: users[2].id, date_followers: Date.today)
-Follower.create!(user: users[0], user2: users[2].id, date_followers: Date.today)
+Follower.create!(user: users[0], followed_user: users[1], date_followers: Date.today)
+Follower.create!(user: users[1], followed_user: users[2], date_followers: Date.today)
+Follower.create!(user: users[0], followed_user: users[2], date_followers: Date.today)
 
 hashtags = [
     Hashtag.create!(name:"#publication"),

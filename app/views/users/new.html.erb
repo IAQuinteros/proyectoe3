@@ -4,11 +4,13 @@
     <div class="card-body">
       
       <% if @user.errors.any? %>
-        <div class="alert alert-danger">
-          <h5>Errores al crear nuevo usuario:</h5>
+          <div class="alert alert-danger">
+          <h5>Errores al crear nuevo User:</h5>
           <ul>
-            <% @user.errors.full_messages.each do |usr| %>
-              <li><%= usr %></li>
+            <% @user.errors.messages.each do |attribute, messages| %>
+              <% messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
             <% end %>
           </ul>
         </div>
@@ -26,8 +28,8 @@
         </div>
 
         <div class="mb-3">
-          <%= form.label :mail, "Email" %>
-          <%= form.email_field :mail, placeholder: "Escribe aquí tu email", class: "form-control" %>
+          <%= form.label :email, "Email" %>
+          <%= form.email_field :email, placeholder: "Escribe aquí tu email", class: "form-control" %>
         </div>
 
         <div class="mb-3">

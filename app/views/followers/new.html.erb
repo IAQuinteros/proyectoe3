@@ -7,8 +7,10 @@
         <div class="alert alert-danger">
           <h5>Errores al crear nuevo follower:</h5>
           <ul>
-            <% @follower.errors.full_messages.each do |flw| %>
-              <li><%= flw %></li>
+            <% @follower.errors.messages.each do |attribute, messages| %>
+              <% messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
             <% end %>
           </ul>
         </div>
@@ -21,11 +23,11 @@
         </div>
         <div>
           <%= form.label :user_id, "Username de usuario 1: " %>
-          <%= form.select :user_id, User.all.map { |u| [u.username, u.id]}, {} %>
+          <%= form.select :user_id, User.all.map { |u| [u.username, u.id]}, {}, class: "form-select"%>
         </div>
         <div>
           <%= form.label :followed_user_id, "Username de usuario 2: " %>
-          <%= form.select :followe_user_id, User.all.map { |u| [u.username, u.id]}, {} %>
+          <%= form.select :followed_user_id, User.all.map { |u| [u.username, u.id]}, {}, class: "form-select" %>
         </div>
 
         <div class="d-flex justify-content-between">
